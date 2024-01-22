@@ -11,19 +11,20 @@ class CommentController extends Controller
     public function store(Idea $idea)
     {
         // dd($idea->id);
-        $comment = new Comment();
-        $comment->idea_id = $idea->id;
-        $comment->content = request()->get("content","");
-        $comment->save();
+        // $comment = new Comment();
+        // $comment->idea_id = $idea->id;
+        // $comment->content = request()->get("content","");
+        // $comment->save();
 
-        // $vilidate = request()->validate([
-        //     "content"=> "required|min:5|max:200",
-        // ]);
-        // Comment::create($vilidate);
+        $vilidate = request()->validate([
+            "comment"=> "required|min:5|max:200",
+        ]);
+        // dd($idea->id);
+        Comment::create([
+                'idea_id'=>$idea->id,
+                'comment'=>$vilidate['comment'],
+        ]);
 
-        return view('dashboard',[
-            'comments'=> Comment::orderBy('created_at','desc'),
-
-        ])->with("success","You Comment is successful Adding");
+        return redirect()->route('dashboard')->with("success","You Comment is successful Adding");
     }
 }

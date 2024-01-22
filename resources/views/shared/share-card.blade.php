@@ -6,7 +6,7 @@
                     <img style="width:50px" class="me-2 avatar-sm rounded-circle"
                         src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Mario" alt="Mario Avatar">
                     <div>
-                        <h5 class="card-title mb-0"><a href="#"> Mario
+                        <h5 class="card-title mb-0"><a href="#"> {{$idea->id}}
                             </a></h5>
                     </div>
                 </div>
@@ -27,9 +27,9 @@
                     @csrf
                     @method('put')
                     <div class="mb-3">
-                        <textarea name="content" class="form-control" id="idea" rows="3">{{$idea->content}}</textarea>
+                        <textarea name="content" class="form-control" id="idea-par" rows="3">{{$idea->content}}</textarea>
                     </div>
-                    @error('idea')
+                    @error('idea-par')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                     <div class="">
