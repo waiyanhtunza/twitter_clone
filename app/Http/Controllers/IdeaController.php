@@ -7,14 +7,13 @@ use Illuminate\Http\Request;
 
 class IdeaController extends Controller
 {
-    public function store()
+    public function store(Idea $idea)   
     {
-        request()->validate([
+        // dd($request);
+        $vilidate = request()->validate([
             "content"=> "required|min:5|max:200",
         ]);
-        Idea::create([
-            "content"=> request()->content,
-        ]);
+        Idea::create($vilidate);
         return redirect()->route('dashboard')->with("success","Your Success Adding Idea");
     }
 
@@ -37,14 +36,10 @@ class IdeaController extends Controller
 
     public function update(Idea $idea)
     {   
-        request()->validate([
+        $validate = request()->validate([
             "content"=> "required|min:5|max:200",
         ]);
-        $idea->content = request()->content;
-        $idea->save();
-
-       
-
+        $idea->update($validate);
         return redirect()->route("ideas.show",$idea->id)->with("update","Your Success Update Idea");
     }
 }
