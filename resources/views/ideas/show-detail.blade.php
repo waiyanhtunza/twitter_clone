@@ -5,7 +5,7 @@
             @include('layouts.profile')
             <div class="col-6">
                 @include('layouts.success-box')
-                
+                {{-- @include('shared.share-idea-box') --}}
                 @include('shared.share-card')
                 <hr>
 

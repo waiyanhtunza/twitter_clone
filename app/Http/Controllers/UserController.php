@@ -9,17 +9,18 @@ class UserController extends Controller
 {
     public function show(User $user)
     {
-        return view('users.show',compact('user'));
+        $ideas = $user->ideas()->paginate(5);
+        return view('users.show', compact('user', 'ideas'));
     }
 
     public function edit(User $user)
     {
-        return view('users.edit',compact('user'));
-        
+        $editing = true;
+        $ideas = $user->ideas()->paginate(5);
+        return view('users.show', compact('user', 'editing', '$ideas'));
     }
 
     public function update(User $user)
     {
-        
     }
 }
