@@ -1,11 +1,12 @@
 <?php
 
+use App\Models\Idea;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\IdeaController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
-use App\Models\Idea;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -35,3 +36,5 @@ Route::resource('ideas', IdeaController::class)
 Route::resource('ideas', IdeaController::class)->only('show');
 
 Route::resource('ideas.comments', CommentController::class)->only('store')->middleware('auth');
+
+Route::resource('users',UserController::class)->only('show','edit','update')->middleware('auth');
