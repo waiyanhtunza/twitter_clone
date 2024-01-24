@@ -6,37 +6,30 @@ use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/',[DashboardController::class,'index'])->name('dashboard');
+Route::get('/terms', [DashboardController::class, 'terms'])->name('terms');
 
-Route::get('/terms',[DashboardController::class,'terms'])->name('ideas.terms');
+Route::group(['prefix'=>'','as'=>'ideas.'], function () {
+    Route::post('/ideas', [IdeaController::class, 'store'])
+        ->name('store')
+        ->middleware('auth');
 
-Route::post('/ideas',[IdeaController::class,'store'])->name('ideas.store')->middleware('auth');
+    Route::delete('{idea}', [IdeaController::class, 'destroy'])
+        ->name('destroy')
+        ->middleware('auth');
 
-Route::delete('/ideas/{idea}',[IdeaController::class,'destroy'])->name('ideas.destroy')->middleware('auth');
+    Route::get('{idea}/edit', [IdeaController::class, 'edit'])
+        ->name('edit')
+        ->middleware('auth');
 
-Route::get('/ideas/{idea}/edit',[IdeaController::class,'edit'])->name('ideas.edit')->middleware('auth');
+    Route::put('{idea}', [IdeaController::class, 'update'])
+        ->name('update')
+        ->middleware('auth');
 
-Route::put('/ideas/{idea}',[IdeaController::class,'update'])->name('ideas.update')->middleware('auth');
+    Route::get('{idea}/show', [IdeaController::class, 'show'])->name('show');
 
-Route::get('/ideas/{idea}/show',[IdeaController::class,'show'])->name('ideas.show');
-
-Route::post('/ideas/{idea}/comments',[CommentController::class,'store'])->name('ideas.comments.store')->middleware('auth');
-
-
-
-
-
-Route::get('/register',[AuthController::class,'register'])->name('register');
- 
-Route::post('/register',[AuthController::class,'store']);
-
-Route::get('/login',[AuthController::class,'login'])->name('login');
- 
-Route::post('/login',[AuthController::class,'authentication']);
-
-Route::post('/logout',[AuthController::class,'logout'])->name('logout');
-
-
-
-
+    Route::post('{idea}/comments', [CommentController::class, 'store'])
+        ->name('comments.store')
+        ->middleware('auth');
+});
