@@ -21,8 +21,10 @@ class CommentController extends Controller
         ]);
         // dd($idea->id);
         Comment::create([
+                'user_id' =>auth()->user()->id,
                 'idea_id'=>$idea->id,
                 'comment'=>$vilidate['comment'],
+
         ]);
 
         return redirect()->route('dashboard')->with("success","You Comment is successful Adding");

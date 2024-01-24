@@ -9,15 +9,21 @@
                 @include('layouts.delete-box')
                 @include('layouts.success-box')
                 @include('shared.share-idea-box')
-                @foreach ($ideas as $idea)
+                <hr>
+                @forelse ($ideas as $idea)
                     @include('shared.share-card')
-                @endforeach
+                @empty
+                    <p class="text-center">No Result found {{ request()->search }}</p>
+                @endforelse
+
+
+
                 <div class="mt-2">
 
                     {{ $ideas->links('pagination::bootstrap-5') }}
                 </div>
 
-                <hr>
+            
 
             </div>
             <div class="col-3">
