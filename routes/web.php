@@ -10,6 +10,8 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
+Route::post('/', [DashboardController::class, 'index']);
+
 Route::get('/terms', [DashboardController::class, 'terms'])->name('terms');
 
 // Route::group(['prefix' => '', 'as' => 'ideas.'], function () {

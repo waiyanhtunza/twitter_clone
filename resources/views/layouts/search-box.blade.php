@@ -3,9 +3,9 @@
         <h5 class="">Searh</h5>
     </div>
     <div class="card-body">
-        <form action="{{route('dashboard')}}" method="get">
+        <form action="{{route('dashboard')}}" method="post">
             @csrf
-            @method('get')
+            @method('post')
             <input placeholder="..." class="form-control w-100" type="text" name="search" value="{{request()->search}}">
             <button class="btn btn-dark mt-2" type="submit"> Search</button>
         </form>

@@ -27,8 +27,7 @@ class UserController extends Controller
     public function profile()
     {
         // $user = auth()->user();
-        return $this->show(auth()->user()->id); 
-
+        return $this->show(auth()->user()); 
 
     }
 }
